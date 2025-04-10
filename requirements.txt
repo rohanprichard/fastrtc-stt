@@ -1,0 +1,5 @@
+numpy
+fastrtc[stt]
+elevenlabs
+python-dotenv
+gradio
