@@ -1,57 +1,44 @@
-# FastRTC STT and Audio Saving Demo
+# FastRTC Speech-to-Text Demos
 
-This project demonstrates real-time audio processing using the `fastrtc` library with Gradio interfaces. It includes two separate applications:
+Two small FastRTC + Gradio experiments for working with live audio in Python:
 
-1.  **Real-time Speech-to-Text (STT):** Transcribes audio input in real-time using the ElevenLabs API (`app.py`).
-2.  **Real-time Audio Saving:** Saves incoming audio streams into chunked `.wav` files (`save_audio_app.py`).
+1. `app.py` transcribes microphone audio using ElevenLabs.
+2. `save_audio_app.py` receives live audio and writes chunked WAV files.
 
 ## Requirements
 
-*   Python 3.x
-*   Dependencies listed in `requirements.txt`:
-    *   `numpy`
-    *   `fastrtc[stt]`
-    *   `elevenlabs`
-    *   `python-dotenv`
-    *   `gradio`
-*   An ElevenLabs API key (for the STT app).
+- Python 3
+- an ElevenLabs API key for the transcription demo
+- a browser that supports microphone input
 
 ## Setup
 
-1.  **Clone the repository (if applicable):**
-    ```bash
-    git clone <repository_url>
-    cd <repository_directory>
-    ```
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-2.  **Create a virtual environment (recommended):**
-    ```bash
-    python -m venv env
-    source env/bin/activate  # On Windows use `env\Scripts\activate`
-    ```
+Create a `.env` file for the transcription demo:
 
-3.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+```env
+ELEVENLABS_API_KEY=your_key_here
+```
 
-4.  **Set up Environment Variables:**
-    Create a file named `.env` in the project root directory. Add your ElevenLabs API key to this file:
-    ```env
-    ELEVENLABS_API_KEY="YOUR_ELEVENLABS_API_KEY"
-    ```
-    Replace `"YOUR_ELEVENLABS_API_KEY"` with your actual key.
+Keep this file out of source control.
 
-## Running the Application
-
-### Real-time STT App
-
-This app captures audio from your microphone and transcribes it in real-time.
+## Run
 
 ```bash
 python app.py
 ```
 
-Navigate to the URL provided by Gradio (usually `http://127.0.0.1:7860`) in your web browser.
+Gradio prints a local URL. Open it, grant microphone access, and speak to see the live transcription. Run `python save_audio_app.py` to use the audio-saving experiment instead.
 
-Navigate to the URL provided by Gradio in your web browser. Audio chunks will be saved automatically to the `saved_audio/` folder in the project directory as they are processed.
+## Notes
+
+The transcription path sends audio to ElevenLabs and therefore requires your own API key and account. The audio-saving path writes files locally; review generated files before sharing them.
+
+## License
+
+MIT
